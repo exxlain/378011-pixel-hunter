@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Светлана Костина](https://up.htmlacademy.ru/ecmascript/5/user/378011).
-* Наставник: [Тимофей Тиунов].
+* Наставник: [Тимофей Тиунов](https://up.htmlacademy.ru/ecmascript/5/user/772815).
 
 ---
 
