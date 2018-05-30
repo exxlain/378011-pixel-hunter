@@ -7,7 +7,7 @@
   const LEFT_ARROW = 37;
   const RIGHT_ARROW = 39;
 
-  const screens = templates.map((key) => document.querySelector(key));
+  const screens = templates.map((template) => document.querySelector(template));
 
   const showScreen = (screenNumber) => {
     mainElement.innerHTML = ``;
