@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  const mainElement = document.querySelector(`#main`);
+  const mainElement = document.querySelector(`main.central`);
   const templates = [`#greeting`, `#rules`, `#game-1`, `#game-2`, `#game-3`, `#stats`];
   let currentScreen = 0;
   const LEFT_ARROW = 37;
