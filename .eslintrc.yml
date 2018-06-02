@@ -8,4 +8,5 @@ env:
   amd: true
 
 
+
 extends: 'htmlacademy/es6'

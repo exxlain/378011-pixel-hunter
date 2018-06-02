@@ -46,7 +46,7 @@ const rulesInput = rulesForm.querySelector(`.rules__input`);
 const backButton = rulesElement.querySelector(`.back`);
 
 rulesInput.addEventListener(`input`, () => {
-  rulesButton.disabled = false;
+  rulesButton.disabled = !rulesInput.value.trim().length;
 });
 
 const resetForm = () => {
