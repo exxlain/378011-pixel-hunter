@@ -49,17 +49,20 @@ rulesInput.addEventListener(`input`, () => {
   rulesButton.disabled = false;
 });
 
+const resetForm = () => {
+  rulesButton.disabled = true;
+  rulesInput.value = ``;
+};
+
 rulesForm.addEventListener(`submit`, (evt) => {
   evt.preventDefault();
   changeScreen(gameOneElement);
-  rulesButton.disabled = true;
-  rulesInput.value = ``;
+  resetForm();
 });
 
 backButton.addEventListener(`click`, () => {
   changeScreen(greetingElement);
-  rulesButton.disabled = true;
-  rulesInput.value = ``;
+  resetForm();
 });
 
 export default rulesElement;

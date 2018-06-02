@@ -10,3 +10,10 @@ export const changeScreen = (element) => {
   mainElement.innerHTML = ``;
   mainElement.appendChild(element);
 };
+
+
+export const uncheckInputs = (arr) => {
+  arr.forEach((input) => {
+    input.checked = false;
+  });
+};

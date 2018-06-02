@@ -1,4 +1,4 @@
-import {getElementFromTemplate, changeScreen} from '../utils';
+import {getElementFromTemplate, changeScreen, uncheckInputs} from '../utils';
 import gameTwoElement from './game-2';
 import greetingElement from './greeting';
 
@@ -78,23 +78,17 @@ const backButton = gameOneElement.querySelector(`button.back`);
 const questionOneInputs = contentForm.elements.question1;
 const questionTwoInputs = contentForm.elements.question2;
 
-const uncheckedInputs = (arr) => {
-  arr.forEach((input) => {
-    input.checked = false;
-  });
-};
-
-inputs.forEach((input) => {
+inputs.forEach((input, index, arr) => {
   input.addEventListener(`change`, () => {
     if ((questionOneInputs[0].checked || questionOneInputs[1].checked) && (questionTwoInputs[0].checked || questionTwoInputs[1].checked)) {
-      uncheckedInputs(inputs);
+      uncheckInputs(arr);
       changeScreen(gameTwoElement);
     }
   });
 });
 
 backButton.addEventListener(`click`, () => {
-  uncheckedInputs(inputs);
+  uncheckInputs(inputs);
   changeScreen(greetingElement);
 });
 
