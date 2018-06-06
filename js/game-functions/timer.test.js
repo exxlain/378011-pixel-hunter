@@ -44,4 +44,10 @@ describe(`check game timer`, () => {
     newTimer.tick();
     assert.isTrue(end);
   });
+  it(`shouldn't call back when the times is not over`, () => {
+    end = false;
+    const newTimer = new Timer(30, reportTimerEnd);
+    newTimer.tick();
+    assert.isFalse(end);
+  });
 });
