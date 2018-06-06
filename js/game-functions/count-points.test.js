@@ -25,62 +25,62 @@ const generateAnswersArr = (answeredQuestions, correct, slow, fast) => {
 
 describe(`check points calculation`, () => {
 
-  it(`should return -1, if replied not all questions`, () => {
+  it(`should return -1, if not all questions are answered`, () => {
     const answersArr = generateAnswersArr(9, 0, 0, 0);
     assert.equal(countPoints(answersArr, 2), -1);
   });
 
-  it(`should return 1150, if replied all questions correct, three lives remain`, () => {
+  it(`should return 1150, if all answers are correct, three lives remain`, () => {
     const answersArr = generateAnswersArr(10, 10, 0, 0);
     assert.equal(countPoints(answersArr, 3), 1150);
   });
 
-  it(`should return 1050, if replied all questions correct, one lives remain`, () => {
+  it(`should return 1050, if all answers are correct, one live remain`, () => {
     const answersArr = generateAnswersArr(10, 10, 0, 0);
     assert.equal(countPoints(answersArr, 1), 1050);
   });
 
-  it(`should return 1000, if replied all questions correct, zero lives remain`, () => {
+  it(`should return 1000, if all answers are correct, zero lives remain`, () => {
     const answersArr = generateAnswersArr(10, 10, 0, 0);
     assert.equal(countPoints(answersArr, 0), 1000);
   });
 
-  it(`should return 500, if replied five questions correct, zero lives remain`, () => {
+  it(`should return 500, if five questions are answered correctly, zero lives remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 0, 0);
     assert.equal(countPoints(answersArr, 0), 500);
   });
 
-  it(`should return 650, if replied five questions correct, three lives remain`, () => {
+  it(`should return 650, if five questions are answered correctly, three lives remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 0, 0);
     assert.equal(countPoints(answersArr, 3), 650);
   });
 
-  it(`should return 450, if replied five questions correct, one question slow, zero lives remain`, () => {
+  it(`should return 450, if five questions are answered correctly, one slow question, zero lives remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 1, 0);
     assert.equal(countPoints(answersArr, 0), 450);
   });
 
-  it(`should return 500, if replied five questions correct, one question slow, one lives remain`, () => {
+  it(`should return 500, if five questions are answered correctly, one slow question, one live remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 1, 0);
     assert.equal(countPoints(answersArr, 1), 500);
   });
 
-  it(`should return 550, if replied five questions correct, one question fast, zero lives remain`, () => {
+  it(`should return 550, if five questions are answered correctly, one fast question, zero lives remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 0, 1);
     assert.equal(countPoints(answersArr, 0), 550);
   });
 
-  it(`should return 600, if replied five questions correct, one question fast, one lives remain`, () => {
+  it(`should return 600, if five questions are answered correctly, one fast question, one live remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 0, 1);
     assert.equal(countPoints(answersArr, 1), 600);
   });
 
-  it(`should return 500, if replied five questions correct, one question slow, one question fast, zero lives remain`, () => {
+  it(`should return 500, if five questions are answered correctly, one slow question, one fast question, zero lives remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 1, 1);
     assert.equal(countPoints(answersArr, 0), 500);
   });
 
-  it(`should return 550, if replied five questions correct, one question slow, one question fast, one lives remain`, () => {
+  it(`should return 550, if five questions are answered correctly, one slow question, one fast question, one live remain`, () => {
     const answersArr = generateAnswersArr(10, 5, 1, 1);
     assert.equal(countPoints(answersArr, 1), 550);
   });
