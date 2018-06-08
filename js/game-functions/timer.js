@@ -8,7 +8,18 @@ export default class Timer {
     return this._time;
   }
   set time(verifiedTime) {
-    this._time = verifiedTime >= 0 ? verifiedTime : 0;
+    if (typeof verifiedTime !== `number`) {
+      throw new Error(`Time should be of type number`);
+    }
+    try {
+      if (verifiedTime <= 0) {
+        throw new Error(`Time shouldn't be 0 or negative value`);
+      }
+    } finally {
+      if (verifiedTime > 0) {
+        this._time = verifiedTime;
+      }
+    }
   }
   tick() {
     if (this._time > 0) {
