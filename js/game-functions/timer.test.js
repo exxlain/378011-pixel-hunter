@@ -44,19 +44,19 @@ describe(`check game timer`, () => {
 
   it(`shouldn't call back, when we are trying to tick to negative values`, () => {
     end = false;
-    assert.throws(() => new Timer(0, reportTimerEnd).tick());
+    assert.throws(() => new Timer(0, reportTimerEnd).tick(), /Time shouldn't be 0 or negative value/);
     assert.isFalse(end);
   });
 
   it(`should throw error when we are trying to set negative values`, () => {
-    assert.throws(() => new Timer(-30, reportTimerEnd));
+    assert.throws(() => new Timer(-30, reportTimerEnd), /Time shouldn't be 0 or negative value/);
   });
 
   it(`should throw error when we are trying to tick to negative values`, () => {
-    assert.throws(() => new Timer(0, reportTimerEnd).tick());
+    assert.throws(() => new Timer(0, reportTimerEnd).tick(), /Time shouldn't be 0 or negative value/);
   });
 
   it(`should throw error when we are trying to set non number value`, () => {
-    assert.throws(() => new Timer([], reportTimerEnd));
+    assert.throws(() => new Timer([], reportTimerEnd), /Time should be of type number/);
   });
 });
