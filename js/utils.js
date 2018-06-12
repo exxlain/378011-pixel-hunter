@@ -6,14 +6,13 @@ export const getElementFromTemplate = (template) => {
   return container;
 };
 
+export const render = () => {
+  const container = document.createElement(`div`);
+  return container;
+};
+
 export const changeScreen = (element) => {
   mainElement.innerHTML = ``;
   mainElement.appendChild(element);
 };
 
-
-export const uncheckInputs = (arr) => {
-  arr.forEach((input) => {
-    input.checked = false;
-  });
-};
