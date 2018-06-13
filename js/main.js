@@ -69,28 +69,30 @@ const startGame = () => {
   // двойная игра
   levelElement.addEventListener(`input`, () => {
     const contentForm = document.querySelector(`.game__content`);
-    const answers = Array.from(contentForm.elements).filter((element) => element.checked);
-    if (answers.length === 2) {
-      const nextLevel = game.level + 1;
-      if (answers[0].value === quests[`game-${game.level}`].questions[0].answer &&
-        answers[1].value === quests[`game-${game.level}`].questions[1].answer) {
-        game = changeLevel(game, nextLevel);
-        answersArr = generateStats(true, 15, answersArr);
-      } else {
-        game = die(game);
-        game = changeLevel(game, nextLevel);
-        answersArr = generateStats(false, 15, answersArr);
+    if (contentForm) {
+      const answers = Array.from(contentForm.elements).filter((element) => element.checked);
+      if (answers.length === 2) {
+        const nextLevel = game.level + 1;
+        if (answers[0].value === quests[`game-${game.level}`].questions[0].answer &&
+          answers[1].value === quests[`game-${game.level}`].questions[1].answer) {
+          game = changeLevel(game, nextLevel);
+          answersArr = generateStats(true, 15, answersArr);
+        } else {
+          game = die(game);
+          game = changeLevel(game, nextLevel);
+          answersArr = generateStats(false, 15, answersArr);
+        }
+        if (!canContinue(game)) {
+          gameContainerElement.innerHTML = ``;
+          gameContainerElement.appendChild(statsElement);
+          statsElement.innerHTML = renderStats(game, answersArr);
+        } else {
+          updateGame(game);
+        }
+        document.querySelector(`button.back`).addEventListener(`click`, () => {
+          changeScreen(greeting);
+        });
       }
-      if (!canContinue(game)) {
-        gameContainerElement.innerHTML = ``;
-        gameContainerElement.appendChild(statsElement);
-        statsElement.innerHTML = renderStats(game, answersArr);
-      } else {
-        updateGame(game);
-      }
-      document.querySelector(`button.back`).addEventListener(`click`, () => {
-        changeScreen(greeting);
-      });
     }
   });
   // тройная игра
