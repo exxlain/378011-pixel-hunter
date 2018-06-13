@@ -12,11 +12,11 @@ describe(`Check level changer`, () => {
   });
 
   it(`should not allow set negative values`, () => {
-    assert.throws(() => changeLevel(INITIAL_GAME, -1).level, /Level should not be negative value/);
+    assert.throws(() => changeLevel(INITIAL_GAME, -1).level, RangeError, `Level should not be negative value`);
   });
 
   it(`should not allow set non number value`, () => {
-    assert.throws(() => changeLevel(INITIAL_GAME, []).level, /Level should be of type number/);
+    assert.throws(() => changeLevel(INITIAL_GAME, []).level, TypeError, `Level should be of type number`);
   });
 
 });

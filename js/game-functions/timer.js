@@ -9,16 +9,13 @@ export default class Timer {
   }
   set time(verifiedTime) {
     if (typeof verifiedTime !== `number`) {
-      throw new Error(`Time should be of type number`);
+      throw new TypeError(`Time should be of type number`);
     }
-    try {
-      if (verifiedTime <= 0) {
-        throw new Error(`Time shouldn't be 0 or negative value`);
-      }
-    } finally {
-      if (verifiedTime > 0) {
-        this._time = verifiedTime;
-      }
+    if (verifiedTime <= 0) {
+      throw new RangeError(`Time shouldn't be 0 or negative value`);
+    }
+    if (verifiedTime > 0) {
+      this._time = verifiedTime;
     }
   }
   tick() {

@@ -44,10 +44,9 @@ const startGame = () => {
   levelElement.addEventListener(`input`, () => {
     const gameOption = document.querySelector(`.game__option:only-child`);
     if (gameOption) {
-      const checkedInput = levelElement.querySelector(`input:checked`);
-      const checkedValue = checkedInput.value;
+      const checkedValue = gameOption.querySelector(`input:checked`).value;
       const nextLevel = game.level + 1;
-      if (checkedValue === quests[`game-${game.level}`].questions[`answer`]) {
+      if (checkedValue === quests[`game-${game.level}`].questions.answer) {
         game = changeLevel(game, nextLevel);
         answersArr = generateStats(true, 15, answersArr);
       } else {
@@ -70,46 +69,39 @@ const startGame = () => {
   // двойная игра
   levelElement.addEventListener(`input`, () => {
     const contentForm = document.querySelector(`.game__content`);
-    if (contentForm) {
-      const answers = Array.from(contentForm.elements).filter((element) => element.checked);
-      if (answers.length === 2) {
-        const questionOne = contentForm.querySelector(`.game__option:first-child`);
-        const checkedValueOne = questionOne.querySelector(`input:checked`).value;
-        const questionTwo = contentForm.querySelector(`.game__option:nth-child(2)`);
-        const checkedValueTwo = questionTwo.querySelector(`input:checked`).value;
-        const nextLevel = game.level + 1;
-        if (checkedValueOne === quests[`game-${game.level}`].questions[0][`answer`] &&
-          checkedValueTwo === quests[`game-${game.level}`].questions[1][`answer`]) {
-          game = changeLevel(game, nextLevel);
-          answersArr = generateStats(true, 15, answersArr);
-        } else {
-          game = die(game);
-          game = changeLevel(game, nextLevel);
-          answersArr = generateStats(false, 15, answersArr);
-        }
-        if (!canContinue(game)) {
-          gameContainerElement.innerHTML = ``;
-          gameContainerElement.appendChild(statsElement);
-          statsElement.innerHTML = renderStats(game, answersArr);
-        } else {
-          updateGame(game);
-        }
-        document.querySelector(`button.back`).addEventListener(`click`, () => {
-          changeScreen(greeting);
-        });
+    const answers = Array.from(contentForm.elements).filter((element) => element.checked);
+    if (answers.length === 2) {
+      const nextLevel = game.level + 1;
+      if (answers[0].value === quests[`game-${game.level}`].questions[0].answer &&
+        answers[1].value === quests[`game-${game.level}`].questions[1].answer) {
+        game = changeLevel(game, nextLevel);
+        answersArr = generateStats(true, 15, answersArr);
+      } else {
+        game = die(game);
+        game = changeLevel(game, nextLevel);
+        answersArr = generateStats(false, 15, answersArr);
       }
+      if (!canContinue(game)) {
+        gameContainerElement.innerHTML = ``;
+        gameContainerElement.appendChild(statsElement);
+        statsElement.innerHTML = renderStats(game, answersArr);
+      } else {
+        updateGame(game);
+      }
+      document.querySelector(`button.back`).addEventListener(`click`, () => {
+        changeScreen(greeting);
+      });
     }
   });
   // тройная игра
   levelElement.addEventListener(`click`, (evt) => {
-    const form = levelElement.querySelector(`.game__content--triple`);
-    if (form) {
-      const imageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
+    const tripleForm = levelElement.querySelector(`.game__content--triple`);
+    if (tripleForm) {
+      const selectedImageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
       const questionsArr = quests[`game-${game.level}`].questions;
-      let searchTerm = `paint`;
-      let rigthSrc = questionsArr.find((question) => question[`answer`] === searchTerm)[`image`];
+      let correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
       const nextLevel = game.level + 1;
-      if (imageSrc === rigthSrc) {
+      if (selectedImageSrc === correctImageSrc) {
         game = changeLevel(game, nextLevel);
         answersArr = generateStats(true, 15, answersArr);
       } else {

@@ -2,7 +2,7 @@ import headerStatic from './header-static';
 import footer from './footer';
 import renderStatsInGame from './stats-in-game';
 import countPoints from '../game-functions/count-points';
-import {sumTrue, numberFast, numberSlow} from '../game-functions/game-logic';
+import {countPointsForCorrect, countFastAnswers, countSlowAnswers} from '../game-functions/game-logic';
 const BONUS = 50;
 const renderStats = (game, answersArr) => {
 
@@ -13,14 +13,14 @@ const renderStats = (game, answersArr) => {
         <td class="result__number">1.</td>
         <td colspan="2">${renderStatsInGame(answersArr)}</td>
         <td class="result__points">×&nbsp;100</td>
-        <td class="result__total">${sumTrue(answersArr)}</td>
+        <td class="result__total">${countPointsForCorrect(answersArr)}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за скорость:</td>
-        <td class="result__extra">${numberFast(answersArr)}<span class="stats__result stats__result--fast"></span></td>
+        <td class="result__extra">${countFastAnswers(answersArr)}<span class="stats__result stats__result--fast"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${numberFast(answersArr) * BONUS}</td>
+        <td class="result__total">${countFastAnswers(answersArr) * BONUS}</td>
       </tr>
       <tr>
         <td></td>
@@ -32,9 +32,9 @@ const renderStats = (game, answersArr) => {
       <tr>
         <td></td>
         <td class="result__extra">Штраф за медлительность:</td>
-        <td class="result__extra">${numberSlow(answersArr)}<span class="stats__result stats__result--slow"></span></td>
+        <td class="result__extra">${countSlowAnswers(answersArr)}<span class="stats__result stats__result--slow"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">-${numberSlow(answersArr) * BONUS}</td>
+        <td class="result__total">-${countSlowAnswers(answersArr) * BONUS}</td>
       </tr>
       <tr>
         <td colspan="5" class="result__total  result__total--final">${countPoints(answersArr, game.lives)}</td>
