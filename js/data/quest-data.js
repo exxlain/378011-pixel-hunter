@@ -1,10 +1,5 @@
 import {images} from './images';
-
-export const GameType = {
-  PHOTO_OR_PICTURE_ONE: 1,
-  PHOTO_OR_PICTURE_TWO: 2,
-  FIND_ONE: 3
-};
+import {GameType} from './data';
 
 export const quests = Object.freeze({
   'game-1': {

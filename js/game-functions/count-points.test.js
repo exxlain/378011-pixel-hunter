@@ -1,5 +1,6 @@
 import {assert} from 'chai';
 import countPoints from './count-points';
+import {testValue} from '../data/data';
 
 // функция для генерации массивов ответов для тестов
 const generateAnswersArr = (answeredQuestions, correct, slow, fast) => {
@@ -12,11 +13,11 @@ const generateAnswersArr = (answeredQuestions, correct, slow, fast) => {
     if (correct > i) {
       answersArr[i].correctAnswer = true;
       if (slow > i) {
-        answersArr[i].answerTime = 29;
+        answersArr[i].answerTime = testValue.SLOW_ANSWER;
       } else if (fast > i - slow) {
-        answersArr[i].answerTime = 5;
+        answersArr[i].answerTime = testValue.FAST_ANSWER;
       } else {
-        answersArr[i].answerTime = 15;
+        answersArr[i].answerTime = testValue.AVERAGE_ANSWER;
       }
     }
   }
