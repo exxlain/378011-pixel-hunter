@@ -13,10 +13,6 @@ export default class IntroView extends AbstractView {
   </div>${footerTemplate}`;
   }
 
-  onClick() {
-
-  }
-
   bind() {
     const introButton = this.element.querySelector(`.intro__asterisk`);
     introButton.addEventListener(`click`, () => {
@@ -29,5 +25,8 @@ export default class IntroView extends AbstractView {
         this.onClick();
       }
     });
+  }
+
+  onClick() {
   }
 }

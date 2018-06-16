@@ -20,13 +20,6 @@ export default class LevelView extends AbstractView {
     return `${headerGameTemplate(this.state)}${gameFormTemplate(this._level)}${statsTemplate(this.answers)}${footerTemplate}`;
   }
 
-  onAnswer(answer) {
-    return answer;
-  }
-
-  onBack() {
-  }
-
   bind() {
     // одиночная игра
     if (this._level.gameType === GameType.PHOTO_OR_PICTURE_ONE) {
@@ -72,5 +65,12 @@ export default class LevelView extends AbstractView {
     this.element.querySelector(`button.back`).addEventListener(`click`, () => {
       this.onBack();
     });
+  }
+
+  onAnswer(answer) {
+    return answer;
+  }
+
+  onBack() {
   }
 }

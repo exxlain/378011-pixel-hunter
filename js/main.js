@@ -6,10 +6,13 @@ import StatsView from './views/stats-view';
 import IntroView from './views/intro-view';
 import GreetingView from './views/greeting-view';
 import RulesView from './views/rules-view';
+import ModalConfirmView from './views/modal-confirm-view';
+const mainElement = document.querySelector(`main.central`);
 
 let introScreen = new IntroView();
 let greetingScreen = new GreetingView();
 let rulesScreen = new RulesView();
+let modalConfirm = new ModalConfirmView();
 
 changeScreen(introScreen.element);
 
@@ -36,7 +39,13 @@ const updateGame = (state, answers) => {
     changeState(answer);
   };
   levelScreen.onBack = () => {
-    changeScreen(greetingScreen.element);
+    mainElement.appendChild(modalConfirm.element);
+    modalConfirm.onConfirm = () => {
+      changeScreen(greetingScreen.element);
+    };
+    modalConfirm.onCancel = () => {
+      mainElement.removeChild(modalConfirm.element);
+    };
   };
 };
 

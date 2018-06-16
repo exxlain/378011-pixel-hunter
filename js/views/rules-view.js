@@ -24,12 +24,6 @@ export default class RulesView extends AbstractView {
   </div>${footerTemplate}`;
   }
 
-  onClick() {
-  }
-
-  onBack() {
-  }
-
   bind() {
     const rulesForm = this.element.querySelector(`.rules__form`);
     const rulesButton = rulesForm.querySelector(`.rules__button`);
@@ -51,6 +45,12 @@ export default class RulesView extends AbstractView {
     this.element.querySelector(`button.back`).addEventListener(`click`, () => {
       this.onBack();
     });
+  }
+
+  onClick() {
+  }
+
+  onBack() {
   }
 }
 

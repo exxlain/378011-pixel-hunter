@@ -20,9 +20,6 @@ export default class GreetingView extends AbstractView {
   </div>${footerTemplate}`;
   }
 
-  onClick() {
-  }
-
   bind() {
     const greetingContinue = this.element.querySelector(`.greeting__continue`);
     greetingContinue.addEventListener(`click`, () => {
@@ -33,6 +30,8 @@ export default class GreetingView extends AbstractView {
         this.onClick();
       }
     });
+  }
 
+  onClick() {
   }
 }

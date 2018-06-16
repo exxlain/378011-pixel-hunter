@@ -104,13 +104,13 @@ export default class StatsView extends AbstractView {
   </div>${footerTemplate}`;
   }
 
-  onBack() {
-  }
-
   bind() {
     this.element.querySelector(`button.back`).addEventListener(`click`, () => {
       this.onBack();
     });
+  }
+
+  onBack() {
   }
 
 }
