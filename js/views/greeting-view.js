@@ -1,9 +1,11 @@
-import {getElementFromTemplate, changeScreen} from '../utils';
-import rules from './rules';
-import footer from './footer';
+import AbstractView from './abstract-view';
+import footerTemplate from '../blocks/footer';
+import {ENTER_KEY_CODE} from '../data/data';
 
-const greetingTemplate =
-  `<div class="greeting central--blur">
+export default class GreetingView extends AbstractView {
+
+  get template() {
+    return `<div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
     <h1 class="greeting__asterisk">*</h1>
     <div class="greeting__challenge">
@@ -14,15 +16,22 @@ const greetingTemplate =
         Фотореализм обманчив и коварен.<br>
         Помни, главное — смотреть очень внимательно.</p>
     </div>
-    <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
-  </div>${footer}`;
+    <div class="greeting__continue" tabindex="1"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
+  </div>${footerTemplate}`;
+  }
 
-const greeting = getElementFromTemplate(greetingTemplate);
+  bind() {
+    const greetingContinue = this.element.querySelector(`.greeting__continue`);
+    greetingContinue.addEventListener(`click`, () => {
+      this.onClick();
+    });
+    greetingContinue.addEventListener(`keydown`, ({keyCode}) => {
+      if (keyCode === ENTER_KEY_CODE) {
+        this.onClick();
+      }
+    });
+  }
 
-const greetingContinue = greeting.querySelector(`.greeting__continue`);
-
-greetingContinue.addEventListener(`click`, () => {
-  changeScreen(rules);
-});
-
-export default greeting;
+  onClick() {
+  }
+}

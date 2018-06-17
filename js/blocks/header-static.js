@@ -1,4 +1,4 @@
-const headerStatic =
+const headerStaticTemplate =
   `<header class="header">
     <div class="header__back">
       <button class="back">
@@ -8,4 +8,4 @@ const headerStatic =
     </div>
   </header>`;
 
-export default headerStatic;
+export default headerStaticTemplate;

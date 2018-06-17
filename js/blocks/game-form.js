@@ -1,6 +1,6 @@
-import {GameType} from '../data/quest-data';
+import {GameType} from '../data/data';
 
-const renderGame = (level) =>{
+const gameFormTemplate = (level) => {
   switch (level.gameType) {
     case GameType.PHOTO_OR_PICTURE_TWO:
       return `<div class="game">
@@ -73,4 +73,4 @@ const renderGame = (level) =>{
   }
 };
 
-export default renderGame;
+export default gameFormTemplate;
