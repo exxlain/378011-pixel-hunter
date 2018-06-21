@@ -28,26 +28,6 @@ describe(`check game timer`, () => {
     assert.equal(newTimer.time, 2);
   });
 
-  it(`should call back when time is over`, () => {
-    end = false;
-    const newTimer = new Timer(1, reportTimerEnd);
-    newTimer.tick();
-    assert.isTrue(end);
-  });
-
-  it(`shouldn't call back when time is not over`, () => {
-    end = false;
-    const newTimer = new Timer(30, reportTimerEnd);
-    newTimer.tick();
-    assert.isFalse(end);
-  });
-
-  it(`shouldn't call back, when we are trying to tick to negative values`, () => {
-    end = false;
-    assert.throws(() => new Timer(0, reportTimerEnd).tick(), RangeError, `Time shouldn't be 0 or negative value`);
-    assert.isFalse(end);
-  });
-
   it(`should throw error when we are trying to set negative values`, () => {
     assert.throws(() => new Timer(-30, reportTimerEnd), RangeError, `Time shouldn't be 0 or negative value`);
   });

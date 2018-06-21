@@ -13,9 +13,9 @@ const generateAnswersArr = (answeredQuestions, correct, slow, fast) => {
     if (correct > i) {
       answersArr[i].correctAnswer = true;
       if (slow > i) {
-        answersArr[i].answerTime = testValue.SLOW_ANSWER;
-      } else if (fast > i - slow) {
         answersArr[i].answerTime = testValue.FAST_ANSWER;
+      } else if (fast > i - slow) {
+        answersArr[i].answerTime = testValue.SLOW_ANSWER;
       } else {
         answersArr[i].answerTime = testValue.AVERAGE_ANSWER;
       }

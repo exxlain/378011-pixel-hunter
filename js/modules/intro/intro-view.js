@@ -1,6 +1,6 @@
-import AbstractView from './abstract-view';
-import footerTemplate from '../blocks/footer';
-import {ENTER_KEY_CODE} from '../data/data';
+import AbstractView from '../abstract-view';
+import footerTemplate from '../../blocks/footer';
+import {ENTER_KEY_CODE} from '../../data/data';
 
 export default class IntroView extends AbstractView {
 

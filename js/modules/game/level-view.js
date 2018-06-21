@@ -1,31 +1,26 @@
-import {quests} from '../data/quest-data';
-import {GameType} from '../data/data';
-import AbstractView from './abstract-view';
-import headerGameTemplate from '../blocks/header-game';
-import gameFormTemplate from '../blocks/game-form';
-import statsTemplate from '../blocks/stats';
-import footerTemplate from '../blocks/footer';
-
-const getLevel = (level) => quests[`game-${level}`];
+import {GameType} from '../../data/data';
+import AbstractView from '../abstract-view';
+import gameFormTemplate from '../../blocks/game-form';
+import statsTemplate from '../../blocks/stats';
+import footerTemplate from '../../blocks/footer';
 
 export default class LevelView extends AbstractView {
-  constructor(state, answers) {
+  constructor(level, answers) {
     super();
-    this.state = state;
+    this.level = level;
     this.answers = answers;
-    this._level = getLevel(state.level);
   }
 
   get template() {
-    return `${headerGameTemplate(this.state)}${gameFormTemplate(this._level)}${statsTemplate(this.answers)}${footerTemplate}`;
+    return `${gameFormTemplate(this.level)}${statsTemplate(this.answers)}${footerTemplate}`;
   }
 
   bind() {
     // одиночная игра
-    if (this._level.gameType === GameType.PHOTO_OR_PICTURE_ONE) {
+    if (this.level.gameType === GameType.PHOTO_OR_PICTURE_ONE) {
       this.element.addEventListener(`input`, () => {
         const checkedValue = this.element.querySelector(`input:checked`).value;
-        if (checkedValue === this._level.questions.answer) {
+        if (checkedValue === this.level.questions.answer) {
           this.onAnswer(true);
         } else {
           this.onAnswer(false);
@@ -33,13 +28,13 @@ export default class LevelView extends AbstractView {
       });
     }
     // двойная игра
-    if (this._level.gameType === GameType.PHOTO_OR_PICTURE_TWO) {
+    if (this.level.gameType === GameType.PHOTO_OR_PICTURE_TWO) {
       const contentForm = this.element.querySelector(`.game__content`);
       this.element.addEventListener(`input`, () => {
         const answers = Array.from(contentForm.elements).filter((element) => element.checked);
         if (answers.length === 2) {
-          if (answers[0].value === this._level.questions[0].answer &&
-            answers[1].value === this._level.questions[1].answer) {
+          if (answers[0].value === this.level.questions[0].answer &&
+            answers[1].value === this.level.questions[1].answer) {
             this.onAnswer(true);
           } else {
             this.onAnswer(false);
@@ -48,11 +43,11 @@ export default class LevelView extends AbstractView {
       });
     }
     // тройная игра
-    if (this._level.gameType === GameType.FIND_ONE) {
+    if (this.level.gameType === GameType.FIND_ONE) {
       const tripleForm = this.element.querySelector(`.game__content--triple`);
       tripleForm.addEventListener(`click`, (evt) => {
         const selectedImageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
-        const questionsArr = this._level.questions;
+        const questionsArr = this.level.questions;
         let correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
         if (selectedImageSrc === correctImageSrc) {
           this.onAnswer(true);
@@ -62,15 +57,10 @@ export default class LevelView extends AbstractView {
       });
     }
 
-    this.element.querySelector(`button.back`).addEventListener(`click`, () => {
-      this.onBack();
-    });
   }
 
   onAnswer(answer) {
     return answer;
   }
 
-  onBack() {
-  }
 }

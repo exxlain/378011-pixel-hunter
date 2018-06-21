@@ -13,8 +13,13 @@ export const changeLevel = (game, level) => {
   return newGame;
 };
 
+export const changeTime = (game, newTime) => {
+  const newGame = Object.assign({}, game, {
+    time: newTime
+  });
+  return newGame;
+};
 
-export const canContinue = (game) => game.lives > 0 && game.level <= Limit.LEVELS;
 
 export const die = (game) => {
   const lives = game.lives - 1;
@@ -38,8 +43,13 @@ export const convertAnswersArr = (arr) => {
   let results = arr.map((el) => {
     let answer;
     if (el.correctAnswer) {
-      answer = el.answerTime < Limit.FAST_TIME ? `fast` : `correct`;
-      answer = el.answerTime > Limit.SLOW_TIME ? `slow` : `correct`;
+      if (el.answerTime > Limit.TIME - Limit.FAST_TIME) {
+        answer = `fast`;
+      } else if (el.answerTime < Limit.TIME - Limit.SLOW_TIME) {
+        answer = `slow`;
+      } else {
+        answer = `correct`;
+      }
     } else {
       answer = `wrong`;
     }
@@ -57,14 +67,16 @@ export const countPointsForCorrect = (arr) => {
 
 // считает количество быстрых ответов
 export const countFastAnswers = (arr) => {
-  const fastArr = arr.filter((el) => el.answerTime < Limit.FAST_TIME);
+  const resultArr = arr.filter((el) => el.correctAnswer);
+  const fastArr = resultArr.filter((el) => el.answerTime > Limit.TIME - Limit.FAST_TIME);
   const fasts = fastArr.length;
   return fasts;
 };
 
 // считает количество медленных ответов
 export const countSlowAnswers = (arr) => {
-  const fastArr = arr.filter((el) => el.answerTime > Limit.SLOW_TIME);
+  const resultArr = arr.filter((el) => el.correctAnswer);
+  const fastArr = resultArr.filter((el) => el.answerTime < Limit.TIME - Limit.SLOW_TIME);
   const fasts = fastArr.length;
   return fasts;
 };

@@ -1,6 +1,6 @@
-import AbstractView from './abstract-view';
-import headerStaticTemplate from '../blocks/header-static';
-import footerTemplate from '../blocks/footer';
+import AbstractView from '../abstract-view';
+import headerStaticTemplate from '../../blocks/header-static';
+import footerTemplate from '../../blocks/footer';
 
 
 export default class RulesView extends AbstractView {

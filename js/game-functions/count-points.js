@@ -8,8 +8,8 @@ const countPoints = (answers, lives) => {
     answers.forEach((el) => {
       if (el.correctAnswer) {
         sum += Rate.CORRECT_ANSWER_POINTS;
-        sum += el.answerTime < Limit.FAST_TIME ? Rate.FAST_ANSWER_BONUS : 0;
-        sum -= el.answerTime > Limit.SLOW_TIME ? Rate.SLOW_ANSWER_FINE : 0;
+        sum += el.answerTime > Limit.TIME - Limit.FAST_TIME ? Rate.FAST_ANSWER_BONUS : 0;
+        sum -= el.answerTime < Limit.TIME - Limit.SLOW_TIME ? Rate.SLOW_ANSWER_FINE : 0;
       }
     });
     sum += lives * Rate.FOR_LIVE_BONUS;

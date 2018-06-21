@@ -1,7 +1,6 @@
 export default class Timer {
-  constructor(time, callback) {
+  constructor(time) {
     this.time = time;
-    this.callback = callback;
   }
 
   get time() {
@@ -21,9 +20,6 @@ export default class Timer {
   tick() {
     if (this._time > 0) {
       this._time--;
-      if (this._time === 0) {
-        this.callback();
-      }
     }
   }
 }

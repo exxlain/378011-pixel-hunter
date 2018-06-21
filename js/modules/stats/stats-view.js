@@ -1,10 +1,10 @@
-import AbstractView from './abstract-view';
-import headerStaticTemplate from '../blocks/header-static';
-import footerTemplate from '../blocks/footer';
-import statsTemplate from '../blocks/stats';
-import countPoints from '../game-functions/count-points';
-import {countPointsForCorrect, countFastAnswers, countSlowAnswers} from '../game-functions/game-logic';
-import {Rate} from '../data/data';
+import AbstractView from '../abstract-view';
+import headerStaticTemplate from '../../blocks/header-static';
+import footerTemplate from '../../blocks/footer';
+import statsTemplate from '../../blocks/stats';
+import countPoints from '../../game-functions/count-points';
+import {countPointsForCorrect, countFastAnswers, countSlowAnswers} from '../../game-functions/game-logic';
+import {Rate} from '../../data/data';
 
 
 export default class StatsView extends AbstractView {
@@ -29,7 +29,7 @@ export default class StatsView extends AbstractView {
         <td class="result__extra">Бонус за скорость:</td>
         <td class="result__extra">${countFastAnswers(this.answers)}<span class="stats__result stats__result--fast"></span></td>
         <td class="result__points">×&nbsp;50</td>
-        <td class="result__total">${countFastAnswers(this.answers) * Rate.CORRECT_ANSWER_POINTS}</td>
+        <td class="result__total">${countFastAnswers(this.answers) * Rate.FAST_ANSWER_BONUS}</td>
       </tr>
       <tr>
         <td></td>
@@ -106,11 +106,11 @@ export default class StatsView extends AbstractView {
 
   bind() {
     this.element.querySelector(`button.back`).addEventListener(`click`, () => {
-      this.onBack();
+      this.onRestart();
     });
   }
 
-  onBack() {
+  onRestart() {
   }
 
 }
