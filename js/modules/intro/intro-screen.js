@@ -6,11 +6,16 @@ export default class IntroScreen {
     this.content = new IntroView();
     this.root = document.createElement(`div`);
     this.root.appendChild(this.content.element);
-    this.content.onClick = this.click.bind(this);
+
+    this.init();
   }
 
   get element() {
     return this.root;
+  }
+
+  init() {
+    this.content.onClick = this.click.bind(this);
   }
 
   click() {

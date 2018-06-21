@@ -6,11 +6,16 @@ export default class GreetingScreen {
     this.content = new GreetingView();
     this.root = document.createElement(`div`);
     this.root.appendChild(this.content.element);
-    this.content.onClick = this.click.bind(this);
+
+    this.init();
   }
 
   get element() {
     return this.root;
+  }
+
+  init() {
+    this.content.onClick = this.click.bind(this);
   }
 
   click() {

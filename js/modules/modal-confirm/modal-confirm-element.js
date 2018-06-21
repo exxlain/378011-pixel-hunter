@@ -7,12 +7,17 @@ export default class ModalConfirmElement {
 
     this.root = document.createElement(`div`);
     this.root.appendChild(this.content.element);
-    this.content.onCancel = this.cancel.bind(this);
-    this.content.onConfirm = this.confirm.bind(this);
+
+    this.init();
   }
 
   get element() {
     return this.root;
+  }
+
+  init() {
+    this.content.onCancel = this.cancel.bind(this);
+    this.content.onConfirm = this.confirm.bind(this);
   }
 
   cancel() {

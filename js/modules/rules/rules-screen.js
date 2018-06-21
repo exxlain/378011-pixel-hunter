@@ -6,12 +6,17 @@ export default class RulesScreen {
     this.content = new RulesView();
     this.root = document.createElement(`div`);
     this.root.appendChild(this.content.element);
-    this.content.onClick = this.click.bind(this);
-    this.content.onBack = this.back.bind(this);
+
+    this.init();
   }
 
   get element() {
     return this.root;
+  }
+
+  init() {
+    this.content.onClick = this.click.bind(this);
+    this.content.onBack = this.back.bind(this);
   }
 
   click() {
