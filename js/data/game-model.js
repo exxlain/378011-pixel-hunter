@@ -1,9 +1,45 @@
 import {INITIAL_GAME, Limit} from './data';
-import {changeLevel, die, generateStats, changeTime} from '../game-functions/game-logic';
 import Timer from '../game-functions/timer.js';
 import {quests} from './quest-data.js';
 
 const getLevel = (state) => quests[`game-${state.level}`];
+
+export const changeLevel = (game, level) => {
+  if (typeof level !== `number`) {
+    throw new TypeError(`Level should be of type number`);
+  }
+  if (level < 0) {
+    throw new RangeError(`Level should not be negative value`);
+  }
+  const newGame = Object.assign({}, game, {
+    level
+  });
+  return newGame;
+};
+
+const changeTime = (game, newTime) => {
+  const newGame = Object.assign({}, game, {
+    time: newTime
+  });
+  return newGame;
+};
+
+const die = (game) => {
+  const lives = game.lives - 1;
+  return Object.assign({}, game, {
+    lives
+  });
+};
+
+// создает объект ответа
+const generateStats = (answerStatus, time) => {
+  const answerResult = {
+    correctAnswer: answerStatus,
+    answerTime: time
+  };
+  return answerResult;
+};
+
 
 class GameModel {
   constructor(playerName) {
@@ -20,11 +56,11 @@ class GameModel {
   }
 
   generateTrueAnswer() {
-    this._answers = generateStats(true, this._state.time, this._answers);
+    this._answers.push(generateStats(true, this._state.time));
   }
 
   generateFalseAnswer() {
-    this._answers = generateStats(false, this._state.time, this._answers);
+    this._answers.push(generateStats(false, this._state.time));
   }
 
   nextLevel() {

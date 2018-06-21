@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {INITIAL_GAME} from '../data/data';
-import {changeLevel} from './game-logic';
+import {INITIAL_GAME} from './data';
+import {changeLevel} from './game-model';
 
 describe(`Check level changer`, () => {
 

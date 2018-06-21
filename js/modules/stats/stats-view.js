@@ -3,9 +3,30 @@ import headerStaticTemplate from '../../blocks/header-static';
 import footerTemplate from '../../blocks/footer';
 import statsTemplate from '../../blocks/stats';
 import countPoints from '../../game-functions/count-points';
-import {countPointsForCorrect, countFastAnswers, countSlowAnswers} from '../../game-functions/game-logic';
-import {Rate} from '../../data/data';
+import {Limit, Rate} from '../../data/data';
 
+// считает баллы за правильные ответы
+const countPointsForCorrect = (arr) => {
+  const resultArr = arr.filter((el) => el.correctAnswer);
+  const sum = resultArr.length * Rate.CORRECT_ANSWER_POINTS;
+  return sum;
+};
+
+// считает количество быстрых ответов
+const countFastAnswers = (arr) => {
+  const resultArr = arr.filter((el) => el.correctAnswer);
+  const fastArr = resultArr.filter((el) => el.answerTime > Limit.TIME - Limit.FAST_TIME);
+  const fasts = fastArr.length;
+  return fasts;
+};
+
+// считает количество медленных ответов
+const countSlowAnswers = (arr) => {
+  const resultArr = arr.filter((el) => el.correctAnswer);
+  const fastArr = resultArr.filter((el) => el.answerTime < Limit.TIME - Limit.SLOW_TIME);
+  const fasts = fastArr.length;
+  return fasts;
+};
 
 export default class StatsView extends AbstractView {
   constructor(state, answers) {

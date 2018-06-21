@@ -1,5 +1,24 @@
-import {convertAnswersArr} from '../game-functions/game-logic';
 import {Limit} from '../data/data';
+
+// преобразует массив объектов ответов в массив вида [`fast`, `correct`]
+export const convertAnswersArr = (arr) => {
+  let results = arr.map((el) => {
+    let answer;
+    if (el.correctAnswer) {
+      if (el.answerTime > Limit.TIME - Limit.FAST_TIME) {
+        answer = `fast`;
+      } else if (el.answerTime < Limit.TIME - Limit.SLOW_TIME) {
+        answer = `slow`;
+      } else {
+        answer = `correct`;
+      }
+    } else {
+      answer = `wrong`;
+    }
+    return answer;
+  });
+  return results;
+};
 
 const statsTemplate = (answersArr) => {
   const results = convertAnswersArr(answersArr);
