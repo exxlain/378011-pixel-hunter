@@ -1,8 +1,8 @@
-export const INITIAL_GAME = Object.freeze({
+export const INITIAL_GAME = {
   level: 1,
   lives: 3,
   time: 30
-});
+};
 
 export const Limit = {
   LIVES: 3,

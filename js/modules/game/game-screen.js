@@ -13,6 +13,7 @@ export default class GameScreen {
     this.root.appendChild(this.header.element);
     this.root.appendChild(this.content.element);
     this._interval = null;
+    this.updateHeader();
   }
 
   get element() {
@@ -40,16 +41,15 @@ export default class GameScreen {
   answer(answer) {
     this.stopGame();
     if (answer) {
-      this.model.nextLevel();
       this.model.generateTrueAnswer();
     } else {
       this.model.die();
-      this.model.nextLevel();
       this.model.generateFalseAnswer();
     }
     if (this.model.isDead() || this.model.isEnd()) {
       this.endGame();
     } else {
+      this.model.nextLevel();
       this.startGame();
     }
   }

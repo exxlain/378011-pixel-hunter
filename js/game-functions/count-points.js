@@ -5,13 +5,18 @@ const countPoints = (answers, lives) => {
   if (answers.length < Limit.LEVELS) {
     sum = -1;
   } else {
-    answers.forEach((el) => {
-      if (el.correctAnswer) {
-        sum += Rate.CORRECT_ANSWER_POINTS;
-        sum += el.answerTime > Limit.TIME - Limit.FAST_TIME ? Rate.FAST_ANSWER_BONUS : 0;
-        sum -= el.answerTime < Limit.TIME - Limit.SLOW_TIME ? Rate.SLOW_ANSWER_FINE : 0;
+    sum = answers.reduce((previous, current) => {
+      if (current.correctAnswer) {
+        previous += Rate.CORRECT_ANSWER_POINTS;
+        if (current.answerTime > Limit.TIME - Limit.FAST_TIME) {
+          return previous + Rate.FAST_ANSWER_BONUS;
+        } else if (current.answerTime < Limit.TIME - Limit.SLOW_TIME) {
+          return previous - Rate.SLOW_ANSWER_FINE;
+        }
       }
-    });
+      return previous;
+    }, 0);
+
     sum += lives * Rate.FOR_LIVE_BONUS;
   }
   return sum;

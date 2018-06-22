@@ -1,45 +1,28 @@
 import {INITIAL_GAME, Limit} from './data';
-import Timer from '../game-functions/timer.js';
+
 import {quests} from './quest-data.js';
 
 const getLevel = (state) => quests[`game-${state.level}`];
 
-export const changeLevel = (game, level) => {
-  if (typeof level !== `number`) {
-    throw new TypeError(`Level should be of type number`);
+const tick = (time) => {
+  if (time > 0) {
+    time--;
   }
-  if (level < 0) {
-    throw new RangeError(`Level should not be negative value`);
-  }
-  const newGame = Object.assign({}, game, {
-    level
-  });
-  return newGame;
+  return time;
 };
 
-const changeTime = (game, newTime) => {
-  const newGame = Object.assign({}, game, {
-    time: newTime
-  });
-  return newGame;
-};
-
-const die = (game) => {
-  const lives = game.lives - 1;
-  return Object.assign({}, game, {
-    lives
-  });
+const generateState = (game) => {
+  return Object.assign({}, game);
 };
 
 // создает объект ответа
-const generateStats = (answerStatus, time) => {
+const generateAnswerStat = (answerStatus, time) => {
   const answerResult = {
     correctAnswer: answerStatus,
     answerTime: time
   };
   return answerResult;
 };
-
 
 class GameModel {
   constructor(playerName) {
@@ -48,7 +31,7 @@ class GameModel {
   }
 
   get state() {
-    return Object.freeze(this._state);
+    return this._state;
   }
 
   get answers() {
@@ -56,32 +39,32 @@ class GameModel {
   }
 
   generateTrueAnswer() {
-    this._answers.push(generateStats(true, this._state.time));
+    this._answers.push(generateAnswerStat(true, this._state.time));
   }
 
   generateFalseAnswer() {
-    this._answers.push(generateStats(false, this._state.time));
+    this._answers.push(generateAnswerStat(false, this._state.time));
   }
 
   nextLevel() {
-    this._state = changeLevel(this._state, this._state.level + 1);
+    this._state.level++;
   }
 
   die() {
-    this._state = die(this._state);
+    this._state.lives--;
   }
 
   restart() {
-    this._state = INITIAL_GAME;
+    this._state = generateState(INITIAL_GAME);
     this._answers = [];
   }
 
   isDead() {
-    return this._state.lives <= 0;
+    return this._state.lives === 0;
   }
 
   isEnd() {
-    return this._state.level > Limit.LEVELS;
+    return this._state.level === Limit.LEVELS;
   }
 
   getCurrentLevel() {
@@ -89,13 +72,11 @@ class GameModel {
   }
 
   tick() {
-    const newTimer = new Timer(this._state.time);
-    newTimer.tick();
-    this._state = changeTime(this._state, newTimer.time);
+    this._state.time = tick(this._state.time);
   }
 
   resetTime() {
-    this._state = changeTime(this._state, Limit.TIME);
+    this._state.time = Limit.TIME;
   }
 
   isTimeEnd() {
