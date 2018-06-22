@@ -3,7 +3,7 @@ import {Limit, Rate} from '../data/data';
 const countPoints = (answers, lives) => {
   let sum = 0;
   if (answers.length < Limit.LEVELS) {
-    sum = -1;
+    sum = `Fail`;
   } else {
     sum = answers.reduce((previous, current) => {
       if (current.correctAnswer) {

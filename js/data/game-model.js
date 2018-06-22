@@ -1,8 +1,5 @@
 import {INITIAL_GAME, Limit} from './data';
 
-import {quests} from './quest-data.js';
-
-const getLevel = (state) => quests[`game-${state.level}`];
 
 const tick = (time) => {
   if (time > 0) {
@@ -25,7 +22,8 @@ const generateAnswerStat = (answerStatus, time) => {
 };
 
 class GameModel {
-  constructor(playerName) {
+  constructor(data, playerName) {
+    this.data = data;
     this.playerName = playerName;
     this.restart();
   }
@@ -67,8 +65,12 @@ class GameModel {
     return this._state.level === Limit.LEVELS;
   }
 
+  getLevel(levelNumber) {
+    return this.data[`game-${levelNumber}`];
+  }
+
   getCurrentLevel() {
-    return getLevel(this._state);
+    return this.getLevel(this._state.level);
   }
 
   tick() {

@@ -37,7 +37,7 @@ const gameFormTemplate = (level) => {
     <p class="game__task">${level.description}</p>
     <form class="game__content  game__content--wide">
       <div class="game__option">
-        <img src="${level.questions.image}" alt="Option 1" width="705" height="455">
+        <img src="${level.questions[0].image}" alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span>Фото</span>
