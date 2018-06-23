@@ -8,8 +8,8 @@ const ServerGameTypeMapper = {
 };
 
 const ServerPictureTypeMapper = {
-  'painting': `paint`,
-  'photo': `photo`
+  painting: `paint`,
+  photo: `photo`
 };
 
 const preprocessLevel = (level) => {
@@ -24,7 +24,7 @@ const preprocessLevel = (level) => {
     el.width = el.image.width;
     el.height = el.image.height;
     el.image = el.image.url;
-    el.answer = ServerPictureTypeMapper[el.type]; // маппинг
+    el.answer = ServerPictureTypeMapper[el.type];
     delete el.type;
   });
 };
