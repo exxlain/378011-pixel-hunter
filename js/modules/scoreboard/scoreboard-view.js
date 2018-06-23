@@ -16,13 +16,12 @@ export default class ScoreboardView extends AbstractView {
 
   showScores(scores) {
     this._scoreBoardContainer.innerHTML = ``;
-    if (scores.length === 2) {
-      this._scoreBoardContainer.innerHTML = `${statsTableTemplate(scores[0], scores[0].stats, 2)}`;
-    }
-    if (scores.length > 2) {
-      this._scoreBoardContainer.innerHTML = `${statsTableTemplate(scores[scores.length - 2], scores[scores.length - 2].stats, 2)}
-      ${statsTableTemplate(scores[scores.length - 3], scores[scores.length - 3].stats, 3)}`;
+    if (scores.length > 1) {
+      scores.pop();
+      scores.reverse();
+      this._scoreBoardContainer.innerHTML = `
+      ${scores.map((it, i) => statsTableTemplate(it, it.stats, i + 2)).join(``)}`;
     }
   }
-}
 
+}

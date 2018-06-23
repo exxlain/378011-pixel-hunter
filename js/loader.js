@@ -4,7 +4,7 @@ const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
 
 const DEFAULT_NAME = `macrell`;
 const APP_ID = 52647819;
-// https://es.dump.academy/pixel-hunter/stats/52647819-cat
+
 const checkStatus = (response) => {
   if (response.ok) {
     return response;
