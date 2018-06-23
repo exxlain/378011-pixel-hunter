@@ -20,7 +20,7 @@ export default class LevelView extends AbstractView {
     if (this.level.gameType === GameType.PHOTO_OR_PICTURE_ONE) {
       this.element.addEventListener(`input`, () => {
         const checkedValue = this.element.querySelector(`input:checked`).value;
-        if (checkedValue === this.level.questions.answer) {
+        if (checkedValue === this.level.questions[0].answer) {
           this.onAnswer(true);
         } else {
           this.onAnswer(false);
@@ -48,7 +48,12 @@ export default class LevelView extends AbstractView {
       tripleForm.addEventListener(`click`, (evt) => {
         const selectedImageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
         const questionsArr = this.level.questions;
-        let correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
+        let correctImageSrc;
+        if (this.level.description === `Найдите фото среди изображений`) {
+          correctImageSrc = questionsArr.find((question) => question.answer === `photo`).image;
+        } else {
+          correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
+        }
         if (selectedImageSrc === correctImageSrc) {
           this.onAnswer(true);
         } else {
