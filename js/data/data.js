@@ -25,10 +25,4 @@ export const GameType = {
   FIND_ONE: 3
 };
 
-export const testValue = {
-  SLOW_ANSWER: 29,
-  FAST_ANSWER: 5,
-  AVERAGE_ANSWER: 15,
-};
-
 export const ENTER_KEY_CODE = 13;

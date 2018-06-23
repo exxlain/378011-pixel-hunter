@@ -6,11 +6,11 @@ const countPoints = (answers, lives) => {
     sum = `Fail`;
   } else {
     sum = answers.reduce((previous, current) => {
-      if (current.correctAnswer) {
+      if (current !== `wrong`) {
         previous += Rate.CORRECT_ANSWER_POINTS;
-        if (current.answerTime > Limit.TIME - Limit.FAST_TIME) {
+        if (current === `fast`) {
           return previous + Rate.FAST_ANSWER_BONUS;
-        } else if (current.answerTime < Limit.TIME - Limit.SLOW_TIME) {
+        } else if (current === `slow`) {
           return previous - Rate.SLOW_ANSWER_FINE;
         }
       }

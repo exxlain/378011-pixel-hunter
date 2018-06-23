@@ -2,9 +2,10 @@ import StatsView from './stats-view.js';
 import Application from '../../application.js';
 
 export default class StatsScreen {
-  constructor(state, answers) {
+  constructor(state, answers, playerName) {
     this.state = state;
     this.answers = answers;
+    this.playerName = playerName;
     this.content = new StatsView(this.state, this.answers);
 
     this.root = document.createElement(`div`);

@@ -1,12 +1,13 @@
 import IntroScreen from './modules/intro/intro-screen.js';
 import GreetingScreen from './modules/greeting/greeting-screen.js';
 import RulesScreen from './modules/rules/rules-screen.js';
-import GameModel from './data/game-model.js';
 import GameScreen from './modules/game/game-screen.js';
-import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
 import StatsScreen from './modules/stats/stats-screen.js';
+import GameModel from './data/game-model.js';
 import ModalErrorView from './modules/modal-error/modal-error.js';
-import {adaptServerData} from './data/data-adapter.js';
+import ScoreboardView from './modules/scoreboard/scoreboard-view.js';
+import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
+import Loader from './loader.js';
 
 const main = document.querySelector(`main.central`);
 
@@ -15,13 +16,6 @@ const changeView = (element) => {
   main.appendChild(element);
 };
 
-const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
 let questData;
 
 export default class Application {
@@ -29,14 +23,12 @@ export default class Application {
   static start() {
     const intro = new IntroScreen();
     changeView(intro.element);
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`).
-      then(checkStatus).
-      then((response) => response.json()).
-      then((data) => {
-        questData = adaptServerData(data);
-      }).
-      then(() => Application.showGreeting()).
-      catch(Application.showError);
+    Loader.loadData().
+    then((data) => {
+      questData = data;
+    }).
+    then(() => Application.showGreeting()).
+    catch(Application.showError);
   }
 
   static showError(error) {
@@ -65,9 +57,17 @@ export default class Application {
     main.appendChild(modalConfirm.element);
   }
 
-  static showStats(state, answers) {
+  static showStats(state, answers, name) {
     const statistics = new StatsScreen(state, answers);
     changeView(statistics.element);
+    const playerName = name;
+    const scoreBoard = new ScoreboardView();
+    const container = document.querySelector(`.result`);
+    container.appendChild(scoreBoard.element);
+    Loader.saveResults(answers, state.lives, playerName).
+    then(() => Loader.loadResults(playerName)).
+    then((data) => scoreBoard.showScores(data)).
+    catch(Application.showError);
   }
 
 }
