@@ -31,10 +31,10 @@ export default class LevelView extends AbstractView {
     if (this.level.gameType === GameType.PHOTO_OR_PICTURE_TWO) {
       const contentForm = this.element.querySelector(`.game__content`);
       this.element.addEventListener(`input`, () => {
-        const answers = Array.from(contentForm.elements).filter((element) => element.checked);
-        if (answers.length === 2) {
-          if (answers[0].value === this.level.questions[0].answer &&
-            answers[1].value === this.level.questions[1].answer) {
+        const checkedAnswers = Array.from(contentForm.elements).filter((element) => element.checked);
+        if (checkedAnswers.length === 2) {
+          if (checkedAnswers[0].value === this.level.questions[0].answer &&
+            checkedAnswers[1].value === this.level.questions[1].answer) {
             this.onAnswer(true);
           } else {
             this.onAnswer(false);

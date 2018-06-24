@@ -1,4 +1,4 @@
-import HeaderGameView from '../header-game-view';
+import HeaderGameView from '../header-game/header-game-view';
 import LevelView from './level-view.js';
 import Application from '../../application.js';
 
@@ -73,7 +73,7 @@ export default class GameScreen {
   }
 
   endGame() {
-    Application.showStats(this.model.state, this.model.answers);
+    Application.showStats(this.model.state, this.model.answers, this.model.playerName);
   }
 
   changeContentView(view) {

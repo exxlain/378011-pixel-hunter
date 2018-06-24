@@ -1,5 +1,5 @@
-import AbstractView from './abstract-view';
-import {Limit} from '../data/data';
+import AbstractView from '../abstract-view';
+import {Limit} from '../../data/data';
 
 
 export default class HeaderGameView extends AbstractView {

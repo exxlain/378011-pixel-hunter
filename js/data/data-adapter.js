@@ -39,5 +39,3 @@ export const adaptServerData = (data) => {
   }
   return newObject;
 };
-
-

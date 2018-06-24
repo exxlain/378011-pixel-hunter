@@ -38,7 +38,8 @@ export default class RulesView extends AbstractView {
     };
     rulesForm.addEventListener(`submit`, (evt) => {
       evt.preventDefault();
-      this.onClick();
+      const newName = rulesInput.value;
+      this.onClick(newName);
       resetForm();
     });
 
@@ -47,7 +48,8 @@ export default class RulesView extends AbstractView {
     });
   }
 
-  onClick() {
+  onClick(name) {
+    return name;
   }
 
   onBack() {
