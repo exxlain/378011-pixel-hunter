@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import resize from './resize';
+import {resize} from './resize';
 
 const createTestForFrame = (frame) => {
   const assertRatio = (given, expected) => {

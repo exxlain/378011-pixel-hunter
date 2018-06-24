@@ -6,6 +6,8 @@ export default class HeaderGameView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
+
+    this.init();
   }
 
   get template() {
@@ -28,6 +30,13 @@ export default class HeaderGameView extends AbstractView {
   </header>`;
   }
 
+  init() {
+    const timer = this.element.querySelector(`.game__timer`);
+    if (this.state.time < `6`) {
+      timer.classList.add(`game__timer-animate`);
+    }
+  }
+
   bind() {
     this.element.querySelector(`button.back`).addEventListener(`click`, () => {
       this.onBack();
@@ -36,4 +45,5 @@ export default class HeaderGameView extends AbstractView {
 
   onBack() {
   }
+
 }

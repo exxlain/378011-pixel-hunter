@@ -1,6 +1,7 @@
 import HeaderGameView from '../header-game/header-game-view';
 import LevelView from './level-view.js';
 import Application from '../../application.js';
+import {resizeImages} from '../../game-functions/resize.js';
 
 
 export default class GameScreen {
@@ -79,5 +80,6 @@ export default class GameScreen {
   changeContentView(view) {
     this.root.replaceChild(view.element, this.content.element);
     this.content = view;
+    resizeImages(view.element);
   }
 }

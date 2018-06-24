@@ -7,6 +7,21 @@
   align-items: center;
 }
 
+@keyframes twinkle {
+  0% {
+     opacity: 0;
+  }
+  25% {
+     opacity: 1;
+  }
+  50% {
+     opacity: 0;
+  }
+  100% {
+     opacity: 1;
+  }
+}
+
 .game__timer {
   @include bold-text;
   font-size: 60px;
@@ -15,6 +30,10 @@
   top: 25px;
   left: 50%;
   transform: translateX(-50%);
+
+  &-animate {
+    animation: twinkle 1s;
+  }
 }
 
 .game__lives {
@@ -137,3 +156,6 @@
   }
 
 }
+
+
+
