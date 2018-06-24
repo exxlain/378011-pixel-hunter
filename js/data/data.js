@@ -1,11 +1,11 @@
 export const INITIAL_GAME = Object.freeze({
   level: 1,
-  lives: 3,
+  lives: 4,
   time: 30
 });
 
 export const Limit = {
-  LIVES: 3,
+  LIVES: 4,
   TIME: 30,
   LEVELS: 10,
   FAST_TIME: 10,
