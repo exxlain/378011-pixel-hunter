@@ -8,6 +8,7 @@ import ModalErrorView from './modules/modal-error/modal-error.js';
 import ScoreboardView from './modules/scoreboard/scoreboard-view.js';
 import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
 import Loader from './loader.js';
+const animationTimeOut = 4000;
 
 const main = document.querySelector(`main.central`);
 
@@ -18,6 +19,13 @@ const changeView = (element) => {
 
 let questData;
 
+const removeIntro = () => {
+  const introPlace = document.querySelector(`.intro__place`);
+  main.removeChild(introPlace);
+  const greetingPlace = document.querySelector(`.greeting__place`);
+  greetingPlace.classList.remove(`greeting__place-animate`, `greeting__place`);
+};
+
 export default class Application {
 
   static start() {
@@ -27,7 +35,7 @@ export default class Application {
     then((data) => {
       questData = data;
     }).
-    then(() => Application.showGreeting()).
+    then(() => Application.showGreetingAnimation()).
     catch(Application.showError);
   }
 
@@ -36,9 +44,21 @@ export default class Application {
     main.appendChild(modalError.element);
   }
 
+  static showGreetingAnimation() {
+    const greeting = new GreetingScreen();
+    main.appendChild(greeting.element);
+    const greetingPlace = document.querySelector(`.greeting__place`);
+    greetingPlace.classList.add(`greeting__place-animate`);
+    const introPlace = document.querySelector(`.intro__place`);
+    introPlace.classList.add(`intro__place-animate`);
+    setTimeout(removeIntro, animationTimeOut);
+  }
+
   static showGreeting() {
     const greeting = new GreetingScreen();
     changeView(greeting.element);
+     const greetingPlace = document.querySelector(`.greeting__place`);
+     greetingPlace.classList.remove(`greeting__place`);
   }
 
   static showRules() {

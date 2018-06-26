@@ -2,6 +2,7 @@ import HeaderGameView from '../header-game/header-game-view';
 import LevelView from './level-view.js';
 import Application from '../../application.js';
 import {resizeImages} from '../../game-functions/resize.js';
+const tickInterval = 1000;
 
 
 export default class GameScreen {
@@ -36,7 +37,7 @@ export default class GameScreen {
       } else {
         this.answer(false);
       }
-    }, 1000);
+    }, tickInterval);
   }
 
   answer(answer) {

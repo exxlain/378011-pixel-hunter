@@ -1,0 +1,40 @@
+
+.intro__place {
+  z-index: 2;
+  opacity: 1;
+  &-animate {
+     animation: fadeout 4s linear;
+     animation-fill-mode: forwards;
+  }
+}
+
+.greeting__place {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  opacity: 0;
+  &-animate {
+     animation: fadein 4s linear;
+     animation-fill-mode: forwards;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
