@@ -21,9 +21,11 @@ let questData;
 
 const removeIntro = () => {
   const introPlace = document.querySelector(`.intro__place`);
-  main.removeChild(introPlace);
-  const greetingPlace = document.querySelector(`.greeting__place`);
-  greetingPlace.classList.remove(`greeting__place-animate`, `greeting__place`);
+  if (introPlace) {
+    const greetingPlace = document.querySelector(`.greeting__place`);
+    main.removeChild(introPlace);
+    greetingPlace.classList.remove(`greeting__place-animate`, `greeting__place`);
+  }
 };
 
 export default class Application {
@@ -46,10 +48,9 @@ export default class Application {
 
   static showGreetingAnimation() {
     const greeting = new GreetingScreen();
-    main.appendChild(greeting.element);
-    const greetingPlace = document.querySelector(`.greeting__place`);
-    greetingPlace.classList.add(`greeting__place-animate`);
     const introPlace = document.querySelector(`.intro__place`);
+    main.appendChild(greeting.element);
+    greeting.element.classList.add(`greeting__place-animate`);
     introPlace.classList.add(`intro__place-animate`);
     setTimeout(removeIntro, animationTimeOut);
   }
@@ -57,8 +58,7 @@ export default class Application {
   static showGreeting() {
     const greeting = new GreetingScreen();
     changeView(greeting.element);
-    const greetingPlace = document.querySelector(`.greeting__place`);
-    greetingPlace.classList.remove(`greeting__place`);
+    greeting.element.classList.remove(`greeting__place`);
   }
 
   static showRules() {
