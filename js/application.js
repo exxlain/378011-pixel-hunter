@@ -57,8 +57,8 @@ export default class Application {
   static showGreeting() {
     const greeting = new GreetingScreen();
     changeView(greeting.element);
-     const greetingPlace = document.querySelector(`.greeting__place`);
-     greetingPlace.classList.remove(`greeting__place`);
+    const greetingPlace = document.querySelector(`.greeting__place`);
+    greetingPlace.classList.remove(`greeting__place`);
   }
 
   static showRules() {
