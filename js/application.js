@@ -8,7 +8,7 @@ import ModalErrorView from './modules/modal-error/modal-error.js';
 import ScoreboardView from './modules/scoreboard/scoreboard-view.js';
 import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
 import Loader from './loader.js';
-const animationTimeOut = 4000;
+const ANIMATION_TIME_OUT = 4000;
 
 const main = document.querySelector(`main.central`);
 
@@ -47,12 +47,12 @@ export default class Application {
   }
 
   static showGreetingAnimation() {
-    const greeting = new GreetingScreen();
     const introPlace = document.querySelector(`.intro__place`);
+    const greeting = new GreetingScreen();
     main.appendChild(greeting.element);
     greeting.element.classList.add(`greeting__place-animate`);
     introPlace.classList.add(`intro__place-animate`);
-    setTimeout(removeIntro, animationTimeOut);
+    setTimeout(removeIntro, ANIMATION_TIME_OUT);
   }
 
   static showGreeting() {

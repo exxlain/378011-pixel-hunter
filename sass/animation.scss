@@ -2,9 +2,9 @@
 .intro__place {
   z-index: 2;
   opacity: 1;
+  transition: 4s linear;
   &-animate {
-     animation: fadeout 4s linear;
-     animation-fill-mode: forwards;
+    opacity: 0;
   }
 }
 
@@ -16,25 +16,16 @@
   z-index: 1;
   opacity: 0;
   &-animate {
-     animation: fadein 4s linear;
-     animation-fill-mode: forwards;
+    animation: fadein 4s linear;
+    animation-fill-mode: forwards;
   }
 }
 
 @keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
+ from {
+   opacity: 0;
+ }
+ to {
+   opacity: 1;
   }
 }
