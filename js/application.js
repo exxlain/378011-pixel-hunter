@@ -8,7 +8,7 @@ import ModalErrorView from './modules/modal-error/modal-error.js';
 import ScoreboardView from './modules/scoreboard/scoreboard-view.js';
 import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
 import Loader from './loader.js';
-const ANIMATION_TIME_OUT = 4000;
+const ANIMATION_TIME_OUT = 2000;
 
 const main = document.querySelector(`main.central`);
 
