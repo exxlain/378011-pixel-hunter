@@ -1,6 +1,5 @@
 import {INITIAL_GAME, Limit} from './data';
 
-
 const tick = (time) => {
   if (time > 0) {
     time--;
@@ -104,7 +103,6 @@ class GameModel {
   isTimeEnd() {
     return this._state.time === 0;
   }
-
 }
 
 export default GameModel;

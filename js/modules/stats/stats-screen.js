@@ -25,5 +25,4 @@ export default class StatsScreen {
   restart() {
     Application.showGreeting();
   }
-
 }

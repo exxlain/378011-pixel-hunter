@@ -1,7 +1,6 @@
 import AbstractView from '../abstract-view';
 import {Limit} from '../../data/data';
 
-
 export default class HeaderGameView extends AbstractView {
   constructor(state) {
     super();
@@ -45,5 +44,4 @@ export default class HeaderGameView extends AbstractView {
 
   onBack() {
   }
-
 }

@@ -5,6 +5,7 @@ export default class ModalErrorView extends AbstractView {
     super();
     this.error = error;
   }
+
   get template() {
     return `<section class="modal-error modal-error__wrap">
     <div class="modal-error__inner">
@@ -13,5 +14,4 @@ export default class ModalErrorView extends AbstractView {
     </div>
   </section>`;
   }
-
 }

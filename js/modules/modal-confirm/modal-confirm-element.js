@@ -28,5 +28,4 @@ export default class ModalConfirmElement {
     this.root.removeChild(this.content.element);
     Application.showGreeting();
   }
-
 }

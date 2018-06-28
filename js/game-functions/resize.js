@@ -20,7 +20,6 @@ export const resize = (frame, given) => {
   return newObject;
 };
 
-
 export const resizeImages = (element) => {
   const images = element.querySelectorAll(`.game__option`);
   images.forEach((el) => {

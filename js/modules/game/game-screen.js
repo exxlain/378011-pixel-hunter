@@ -4,7 +4,6 @@ import Application from '../../application.js';
 import {resizeImages} from '../../game-functions/resize.js';
 const TICK_INTERVAL = 1000;
 
-
 export default class GameScreen {
   constructor(model) {
     this.model = model;

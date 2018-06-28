@@ -83,8 +83,6 @@ export default class LevelView extends AbstractView {
         });
       });
     }
-
-
     // тройная игра
     if (this.level.gameType === GameType.FIND_ONE) {
       const tripleForm = this.element.querySelector(`.game__content--triple`);
@@ -111,8 +109,8 @@ export default class LevelView extends AbstractView {
         }
       });
     }
-
   }
+
   describeDebugMode() {
     return this.debugMode ? `<div class="debug">Debug mode. The correct answers are highlighted with a yellow border</div>` : ``;
   }
@@ -120,5 +118,4 @@ export default class LevelView extends AbstractView {
   onAnswer(answer) {
     return answer;
   }
-
 }

@@ -26,5 +26,4 @@ export default class RulesScreen {
   back() {
     Application.showGreeting();
   }
-
 }

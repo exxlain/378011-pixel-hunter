@@ -18,8 +18,6 @@ export default class IntroView extends AbstractView {
     introButton.addEventListener(`click`, () => {
       this.onClick();
     });
-
-
     introButton.addEventListener(`keydown`, ({keyCode}) => {
       if (keyCode === ENTER_KEY_CODE) {
         this.onClick();

@@ -12,12 +12,12 @@ const ANIMATION_TIME_OUT = 2000;
 
 const main = document.querySelector(`main.central`);
 
+let questData;
+
 const changeView = (element) => {
   main.innerHTML = ``;
   main.appendChild(element);
 };
-
-let questData;
 
 const removeIntro = () => {
   const introPlace = document.querySelector(`.intro__place`);
@@ -89,5 +89,4 @@ export default class Application {
     then((data) => scoreBoard.showScores(data)).
     catch(Application.showError);
   }
-
 }

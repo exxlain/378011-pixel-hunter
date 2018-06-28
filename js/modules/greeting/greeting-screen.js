@@ -22,5 +22,4 @@ export default class GreetingScreen {
   click() {
     Application.showRules();
   }
-
 }

@@ -23,5 +23,4 @@ export default class ScoreboardView extends AbstractView {
       ${scores.map((it, i) => statsTableTemplate(it, it.stats, i + 2)).join(``)}`;
     }
   }
-
 }

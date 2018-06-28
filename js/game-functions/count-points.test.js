@@ -80,4 +80,3 @@ describe(`check points calculation`, () => {
     assert.equal(countPoints(answersArr, 1), 550);
   });
 });
-

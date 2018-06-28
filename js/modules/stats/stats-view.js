@@ -22,6 +22,5 @@ export default class StatsView extends AbstractView {
 
   onRestart() {
   }
-
 }
 
