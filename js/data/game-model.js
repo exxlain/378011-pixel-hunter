@@ -63,7 +63,7 @@ class GameModel {
     this._answers.push(generateAnswerStat(false, this._state.time));
   }
 
-  nextLevel() {
+  goToNextLevel() {
     this._state.level++;
   }
 

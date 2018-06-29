@@ -50,7 +50,7 @@ export default class GameScreen {
     if (this.model.isDead() || this.model.isEnd()) {
       this.endGame();
     } else {
-      this.model.nextLevel();
+      this.model.goToNextLevel();
       this.startGame();
     }
   }
