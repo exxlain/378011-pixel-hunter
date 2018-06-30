@@ -70,7 +70,7 @@ export default class LevelView extends AbstractView {
           const checkedAnswers = Array.from(contentForm.elements).filter((element) => element.checked);
           if (checkedAnswers.length === 2) {
             this.onAnswer(checkedAnswers[0].value === this.level.questions[0].answer &&
-            checkedAnswers[1].value === this.level.questions[1].answer);
+              checkedAnswers[1].value === this.level.questions[1].answer);
           }
         });
       });

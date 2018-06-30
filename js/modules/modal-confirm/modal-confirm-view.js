@@ -24,7 +24,8 @@ export default class ModalConfirmView extends AbstractView {
     const onCancelClick = (evt) => {
       evt.stopPropagation();
       evt.preventDefault();
-      evt.target.removeEventListener(`click`, onCancelClick);
+      cancelButton.removeEventListener(`click`, onCancelClick);
+      closeButton.removeEventListener(`click`, onCancelClick);
 
       this.onCancel();
     };
