@@ -1,4 +1,5 @@
-import HeaderGameView from '../header-game/header-game-view';
+import BackButtonView from '../back-button/back-button-view';
+import HeaderGameView from '../header/header-game-view';
 import LevelView from './level-view.js';
 import Application from '../../application.js';
 import {resizeImages} from '../../game-functions/resize.js';
@@ -7,14 +8,24 @@ const TICK_INTERVAL = 1000;
 export default class GameScreen {
   constructor(model) {
     this.model = model;
-    this.header = new HeaderGameView(this.model.state);
     this.content = new LevelView(this.model.getCurrentLevel(), this.model.answers);
+    this.gameHeader = new HeaderGameView(this.model.state);
+    this.backButton = new BackButtonView();
 
     this.root = document.createElement(`div`);
-    this.root.appendChild(this.header.element);
+    this.createHeaderElement();
+    this.root.appendChild(this.header);
     this.root.appendChild(this.content.element);
     this._interval = null;
     this.updateHeader();
+  }
+  createHeaderElement() {
+    this.header = document.createElement(`header`);
+    this.header.className = `header`;
+
+    this.header.appendChild(this.backButton.element);
+    this.header.appendChild(this.gameHeader.element);
+
   }
 
   get element() {
@@ -55,15 +66,18 @@ export default class GameScreen {
     }
   }
 
-  back() {
+  restart() {
     Application.showModalConfirm();
   }
 
   updateHeader() {
-    const header = new HeaderGameView(this.model.state);
-    this.root.replaceChild(header.element, this.header.element);
-    this.header = header;
-    header.onBack = this.back.bind(this);
+    const gameHeader = new HeaderGameView(this.model.state);
+    const backButton = new BackButtonView();
+    this.header.replaceChild(gameHeader.element, this.gameHeader.element);
+    this.header.replaceChild(backButton.element, this.backButton.element);
+    this.gameHeader = gameHeader;
+    this.backButton = backButton;
+    this.backButton.onRestartClick = this.restart.bind(this);
   }
 
   changeLevel() {

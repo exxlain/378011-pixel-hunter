@@ -1,4 +1,6 @@
 import StatsView from './stats-view.js';
+import BackButtonView from '../back-button/back-button-view';
+import HeaderView from '../header/header-view';
 import Application from '../../application.js';
 
 export default class StatsScreen {
@@ -7,8 +9,11 @@ export default class StatsScreen {
     this.answers = answers;
     this.playerName = playerName;
     this.content = new StatsView(this.state, this.answers);
+    this.backButton = new BackButtonView();
+    this.header = new HeaderView();
 
     this.root = document.createElement(`div`);
+    this.root.appendChild(this.header.element.appendChild(this.backButton.element));
     this.root.appendChild(this.content.element);
 
     this.init();
@@ -19,7 +24,7 @@ export default class StatsScreen {
   }
 
   init() {
-    this.content.onRestart = this.restart.bind(this);
+    this.backButton.onRestartClick = this.restart.bind(this);
   }
 
   restart() {

@@ -16,7 +16,7 @@ export default class GreetingScreen {
   }
 
   init() {
-    this.content.onClick = this.click.bind(this);
+    this.content.onNextClick = this.click.bind(this);
   }
 
   click() {

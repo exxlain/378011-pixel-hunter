@@ -56,11 +56,7 @@ export default class LevelView extends AbstractView {
       inputs.forEach((el) => {
         el.addEventListener(`change`, () => {
           const checkedValue = this.element.querySelector(`input:checked`).value;
-          if (checkedValue === this.level.questions[0].answer) {
-            this.onAnswer(true);
-          } else {
-            this.onAnswer(false);
-          }
+          this.onAnswer(checkedValue === this.level.questions[0].answer);
         });
       });
     }
@@ -73,12 +69,8 @@ export default class LevelView extends AbstractView {
         el.addEventListener(`change`, () => {
           const checkedAnswers = Array.from(contentForm.elements).filter((element) => element.checked);
           if (checkedAnswers.length === 2) {
-            if (checkedAnswers[0].value === this.level.questions[0].answer &&
-              checkedAnswers[1].value === this.level.questions[1].answer) {
-              this.onAnswer(true);
-            } else {
-              this.onAnswer(false);
-            }
+            this.onAnswer(checkedAnswers[0].value === this.level.questions[0].answer &&
+            checkedAnswers[1].value === this.level.questions[1].answer);
           }
         });
       });
@@ -102,11 +94,7 @@ export default class LevelView extends AbstractView {
         } else {
           correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
         }
-        if (selectedImageSrc === correctImageSrc) {
-          this.onAnswer(true);
-        } else {
-          this.onAnswer(false);
-        }
+        this.onAnswer(selectedImageSrc === correctImageSrc);
       });
     }
   }

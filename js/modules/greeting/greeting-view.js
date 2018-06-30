@@ -22,16 +22,21 @@ export default class GreetingView extends AbstractView {
 
   bind() {
     const greetingContinue = this.element.querySelector(`.greeting__continue`);
-    greetingContinue.addEventListener(`click`, () => {
-      this.onClick();
-    });
+
+    const onNextButtonClick = () => {
+      greetingContinue.removeEventListener(`click`, onNextButtonClick);
+      this.onNextClick();
+    };
+
+    greetingContinue.addEventListener(`click`, onNextButtonClick);
+
     greetingContinue.addEventListener(`keydown`, ({keyCode}) => {
       if (keyCode === ENTER_KEY_CODE) {
-        this.onClick();
+        onNextButtonClick();
       }
     });
   }
 
-  onClick() {
+  onNextClick() {
   }
 }

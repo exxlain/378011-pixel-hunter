@@ -14,7 +14,6 @@
 
   font-size: 172px;
   color: $main-red-color;
-  cursor: pointer;
 
   position: relative;
   top: 220px;
@@ -27,6 +26,13 @@
   &:active {
     color: $link-active-color;
   }
+
+  &-rotate {
+    animation: spin 1s infinite linear;
+    display: block;
+    top: 170px;
+    padding-top: 50px;
+  }
 }
 
 .intro__motto {
@@ -35,3 +41,13 @@
   position: absolute;
   bottom: 0;
 }
+
+@keyframes spin {
+   0% {
+     transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

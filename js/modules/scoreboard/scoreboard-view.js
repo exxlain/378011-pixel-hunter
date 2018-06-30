@@ -6,7 +6,7 @@ export default class ScoreboardView extends AbstractView {
   get template() {
     return `
 <div class="end">
-  <div class="scoreboard">Scoreboard is loading...</div>
+  <div class="scoreboard">Предыдущие результаты прохождения игры загружаются...</div>
 </div>`;
   }
 

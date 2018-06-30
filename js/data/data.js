@@ -9,7 +9,8 @@ export const Limit = {
   TIME: 30,
   LEVELS: 10,
   FAST_TIME: 10,
-  SLOW_TIME: 20
+  SLOW_TIME: 20,
+  TIMER_TWINK: 5
 };
 
 export const Rate = {

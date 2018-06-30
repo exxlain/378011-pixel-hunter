@@ -1,11 +1,10 @@
 import AbstractView from '../abstract-view';
-import headerStaticTemplate from '../../blocks/header-static';
 import footerTemplate from '../../blocks/footer';
 
 export default class RulesView extends AbstractView {
 
   get template() {
-    return `${headerStaticTemplate}<div class="rules">
+    return `<div class="rules">
     <h1 class="rules__title">Правила</h1>
     <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
       src="img/photo_icon.png" width="16" height="16"> или рисунок <img
@@ -28,30 +27,33 @@ export default class RulesView extends AbstractView {
     const rulesButton = rulesForm.querySelector(`.rules__button`);
     const rulesInput = rulesForm.querySelector(`.rules__input`);
 
-    rulesInput.addEventListener(`input`, () => {
+    const onRulesInputChange = () => {
       rulesButton.disabled = !rulesInput.value.trim().length;
-    });
+    };
+
+    rulesInput.addEventListener(`input`, onRulesInputChange);
+
     const resetForm = () => {
       rulesButton.disabled = true;
       rulesInput.value = ``;
     };
-    rulesForm.addEventListener(`submit`, (evt) => {
+
+    const onSubmitButtonClick = (evt) => {
       evt.preventDefault();
       const newName = rulesInput.value;
-      this.onClick(newName);
+      this.onNextClick(newName);
       resetForm();
-    });
 
-    this.element.querySelector(`button.back`).addEventListener(`click`, () => {
-      this.onBack();
+      rulesInput.removeEventListener(`input`, onRulesInputChange);
+      rulesForm.removeEventListener(`submit`, onSubmitButtonClick);
+    };
+
+    rulesForm.addEventListener(`submit`, (evt) => {
+      onSubmitButtonClick(evt);
     });
   }
 
-  onClick(name) {
+  onNextClick(name) {
     return name;
   }
-
-  onBack() {
-  }
 }
-
