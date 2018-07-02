@@ -1,10 +1,8 @@
 import {Limit, Rate} from '../data/data';
 
 const countPoints = (answers, lives) => {
-  let sum = 0;
-  if (answers.length < Limit.LEVELS) {
-    sum = `Fail`;
-  } else {
+  let sum = `Fail`;
+  if (answers.length === Limit.LEVELS) {
     sum = answers.reduce((previous, current) => {
       if (current !== `wrong`) {
         previous += Rate.CORRECT_ANSWER_POINTS;
@@ -16,7 +14,6 @@ const countPoints = (answers, lives) => {
       }
       return previous;
     }, 0);
-
     sum += lives * Rate.FOR_LIVE_BONUS;
   }
   return sum;
