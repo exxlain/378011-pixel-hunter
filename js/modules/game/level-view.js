@@ -35,6 +35,55 @@ const showRightAnswerTripleGame = (imageSrc, debugMode, element) => {
   }
 };
 
+const handleSingleGame = (element, level, debugMode, onAnswer) => {
+  showRightAnswerSingleGame(debugMode, element, level);
+  const contentForm = element.querySelector(`.game__content--wide`);
+  const inputs = Array.from(contentForm.elements);
+  inputs.forEach((el) => {
+    el.addEventListener(`change`, () => {
+      const checkedValue = element.querySelector(`input:checked`).value;
+      onAnswer(checkedValue === level.questions[0].answer);
+    });
+  });
+};
+
+const handleDoubleGame = (element, level, debugMode, onAnswer) => {
+  showRightAnswersDoubleGame(debugMode, element, level);
+  const contentForm = element.querySelector(`.game__content`);
+  const inputs = Array.from(contentForm.elements);
+  inputs.forEach((el) => {
+    el.addEventListener(`change`, () => {
+      const checkedAnswers = Array.from(contentForm.elements).filter((answer) => answer.checked);
+      if (checkedAnswers.length === 2) {
+        onAnswer(checkedAnswers[0].value === level.questions[0].answer &&
+        checkedAnswers[1].value === level.questions[1].answer);
+      }
+    });
+  });
+};
+
+const handleTripleGame = (element, level, debugMode, onAnswer) => {
+  const tripleForm = element.querySelector(`.game__content--triple`);
+  const questionsArr = level.questions;
+  let correctImageSrc;
+  if (level.description === `Найдите фото среди изображений`) {
+    correctImageSrc = questionsArr.find((question) => question.answer === `photo`).image;
+    showRightAnswerTripleGame(correctImageSrc, debugMode, element);
+  } else {
+    correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
+    showRightAnswerTripleGame(correctImageSrc, debugMode, element);
+  }
+  tripleForm.addEventListener(`click`, (evt) => {
+    const selectedImageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
+    if (level.description === `Найдите фото среди изображений`) {
+      correctImageSrc = questionsArr.find((question) => question.answer === `photo`).image;
+    } else {
+      correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
+    }
+    onAnswer(selectedImageSrc === correctImageSrc);
+  });
+};
+
 export default class LevelView extends AbstractView {
   constructor(level, answers) {
     super();
@@ -48,54 +97,18 @@ export default class LevelView extends AbstractView {
   }
 
   bind() {
-    // одиночная игра
-    if (this.level.gameType === GameType.PHOTO_OR_PICTURE_ONE) {
-      showRightAnswerSingleGame(this.debugMode, this.element, this.level);
-      const contentForm = this.element.querySelector(`.game__content--wide`);
-      const inputs = Array.from(contentForm.elements);
-      inputs.forEach((el) => {
-        el.addEventListener(`change`, () => {
-          const checkedValue = this.element.querySelector(`input:checked`).value;
-          this.onAnswer(checkedValue === this.level.questions[0].answer);
-        });
-      });
-    }
-    // двойная игра
-    if (this.level.gameType === GameType.PHOTO_OR_PICTURE_TWO) {
-      showRightAnswersDoubleGame(this.debugMode, this.element, this.level);
-      const contentForm = this.element.querySelector(`.game__content`);
-      const inputs = Array.from(contentForm.elements);
-      inputs.forEach((el) => {
-        el.addEventListener(`change`, () => {
-          const checkedAnswers = Array.from(contentForm.elements).filter((element) => element.checked);
-          if (checkedAnswers.length === 2) {
-            this.onAnswer(checkedAnswers[0].value === this.level.questions[0].answer &&
-              checkedAnswers[1].value === this.level.questions[1].answer);
-          }
-        });
-      });
-    }
-    // тройная игра
-    if (this.level.gameType === GameType.FIND_ONE) {
-      const tripleForm = this.element.querySelector(`.game__content--triple`);
-      const questionsArr = this.level.questions;
-      let correctImageSrc;
-      if (this.level.description === `Найдите фото среди изображений`) {
-        correctImageSrc = questionsArr.find((question) => question.answer === `photo`).image;
-        showRightAnswerTripleGame(correctImageSrc, this.debugMode, this.element);
-      } else {
-        correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
-        showRightAnswerTripleGame(correctImageSrc, this.debugMode, this.element);
-      }
-      tripleForm.addEventListener(`click`, (evt) => {
-        const selectedImageSrc = evt.target.querySelector(`img`).getAttribute(`src`);
-        if (this.level.description === `Найдите фото среди изображений`) {
-          correctImageSrc = questionsArr.find((question) => question.answer === `photo`).image;
-        } else {
-          correctImageSrc = questionsArr.find((question) => question.answer === `paint`).image;
-        }
-        this.onAnswer(selectedImageSrc === correctImageSrc);
-      });
+    switch (this.level.gameType) {
+      case GameType.PHOTO_OR_PICTURE_ONE:
+        handleSingleGame(this.element, this.level, this.debugMode, this.onAnswer);
+        break;
+      case GameType.PHOTO_OR_PICTURE_TWO:
+        handleDoubleGame(this.element, this.level, this.debugMode, this.onAnswer);
+        break;
+      case GameType.FIND_ONE:
+        handleTripleGame(this.element, this.level, this.debugMode, this.onAnswer);
+        break;
+      default:
+        throw new RangeError(`No such type of game`);
     }
   }
 
