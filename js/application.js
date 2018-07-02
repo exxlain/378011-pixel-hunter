@@ -4,7 +4,7 @@ import RulesScreen from './modules/rules/rules-screen.js';
 import GameScreen from './modules/game/game-screen.js';
 import StatsScreen from './modules/stats/stats-screen.js';
 import GameModel from './data/game-model.js';
-import ModalErrorView from './modules/modal-error/modal-error.js';
+import ModalErrorView from './modules/modal-error/modal-error-view.js';
 import ScoreboardView from './modules/scoreboard/scoreboard-view.js';
 import ModalConfirmElement from './modules/modal-confirm/modal-confirm-element.js';
 import Loader from './loader.js';
