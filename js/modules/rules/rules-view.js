@@ -1,6 +1,11 @@
 import AbstractView from '../abstract-view';
 import footerTemplate from '../../blocks/footer';
 
+const resetForm = (button, input) => {
+  button.disabled = true;
+  input.value = ``;
+};
+
 export default class RulesView extends AbstractView {
 
   get template() {
@@ -33,16 +38,11 @@ export default class RulesView extends AbstractView {
 
     rulesInput.addEventListener(`input`, onRulesInputChange);
 
-    const resetForm = () => {
-      rulesButton.disabled = true;
-      rulesInput.value = ``;
-    };
-
     const onSubmitButtonClick = (evt) => {
       evt.preventDefault();
       const newName = rulesInput.value;
       this.onNextClick(newName);
-      resetForm();
+      resetForm(rulesButton, rulesInput);
 
       rulesInput.removeEventListener(`input`, onRulesInputChange);
       rulesForm.removeEventListener(`submit`, onSubmitButtonClick);
