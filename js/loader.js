@@ -3,7 +3,7 @@ import {adaptServerData} from './data/data-adapter.js';
 const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
 
 const DEFAULT_NAME = `macrell`;
-const APP_ID = 52647819;
+const APP_ID = 52647818;
 
 const checkStatus = (response) => {
   if (response.ok) {

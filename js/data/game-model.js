@@ -22,7 +22,7 @@ const generateAnswerStat = (answerStatus, time) => {
 
 // преобразует массив объектов ответов в массив вида [`fast`, `correct`]
 const convertAnswersArr = (arr) => {
-  let results = arr.map((el) => {
+  return arr.map((el) => {
     let answer;
     if (el.correctAnswer) {
       if (el.answerTime > Limit.TIME - Limit.FAST_TIME) {
@@ -37,7 +37,6 @@ const convertAnswersArr = (arr) => {
     }
     return answer;
   });
-  return results;
 };
 
 class GameModel {
